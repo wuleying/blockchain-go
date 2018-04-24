@@ -1,37 +1,31 @@
 package main
 
 import (
-	"bytes"
-	"crypto/sha256"
-	"strconv"
 	"time"
 )
 
-// Block 区块结构体
+// Block keeps block headers
 type Block struct {
-	Timestamp     int64  // 当前时间戳，也就是区块创建的时间
-	Data          []byte // 区块存储的实际有效的信息
-	PrevBlockHash []byte // 存储的是前一个块的哈希
-	Hash          []byte // 当前块的哈希
+	Timestamp     int64
+	Data          []byte
+	PrevBlockHash []byte
+	Hash          []byte
+	Nonce         int
 }
 
-// SetHash
-func (b *Block) SetHash() {
-	timestamp := []byte(strconv.FormatInt(b.Timestamp, 10))
-	headers := bytes.Join([][]byte{b.PrevBlockHash, b.Data, timestamp}, []byte{})
-	hash := sha256.Sum256(headers)
-
-	b.Hash = hash[:]
-}
-
-// NewBlock
+// NewBlock creates and returns Block
 func NewBlock(data string, prevBlockHash []byte) *Block {
-	block := &Block{time.Now().Unix(), []byte(data), prevBlockHash, []byte{}}
-	block.SetHash()
+	block := &Block{time.Now().Unix(), []byte(data), prevBlockHash, []byte{}, 0}
+	pow := NewProofOfWork(block)
+	nonce, hash := pow.Run()
+
+	block.Hash = hash[:]
+	block.Nonce = nonce
+
 	return block
 }
 
-// NewGenesisBlock 创世区块
+// NewGenesisBlock creates and returns genesis Block
 func NewGenesisBlock() *Block {
 	return NewBlock("Genesis Block", []byte{})
 }

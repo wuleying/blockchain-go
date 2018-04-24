@@ -34,3 +34,61 @@ run:
 	@echo $(CUR_TIME) [INFO ] CUR_DIR=\"$(CUR_DIR)\"
 	@echo $(CUR_TIME) [INFO ] BIN_DIR=\"$(BIN_DIR)\"
 	$(BIN_DIR)/$(PROJECT_NAME)
+
+# Test tools
+test:
+	$(GO_TEST)
+
+cover:
+	$(GO_TEST) -cover
+
+# Check tools
+check: vet lint gocyclo gosimple unused staticcheck ineffassign misspell
+
+vet:
+	@echo go vet
+	@if test -n '$(shell go vet `glide nv` 2>&1)'; then \
+		echo '$(shell go vet `glide nv` 2>&1)'; \
+	fi
+
+lint:
+	@echo golint
+	@if test -n '$(shell golint `glide nv` 2>&1)'; then \
+		echo '$(shell golint `glide nv` 2>&1)'; \
+	fi
+
+gocyclo:
+	gocyclo -over 20 $(shell find . -name "*.go" | egrep -v "vendor")
+
+gosimple:
+	gosimple $(shell glide nv)
+
+unused:
+	unused $(shell glide nv)
+
+staticcheck:
+	staticcheck $(shell glide nv)
+
+ineffassign:
+	@for f in `find . -type d -depth 1 | egrep -v "git|hook|vendor"`; do \
+		ineffassign $$f; \
+	done
+
+misspell:
+	misspell -i "unknwon" $(shell find . -maxdepth 1 -mindepth 1 -type d | egrep -v "vendor|doc|bin|.git|.idea")
+
+goconst:
+	goconst $(shell glide nv)
+
+# Get tools and third packages
+get:
+	go get github.com/Masterminds/glide
+	go get honnef.co/go/tools/cmd/staticcheck
+	go get honnef.co/go/tools/cmd/gosimple
+	go get honnef.co/go/tools/cmd/unused
+	go get github.com/gordonklaus/ineffassign
+	go get github.com/fzipp/gocyclo
+	go get github.com/golang/lint/golint
+	go get github.com/pierrre/gotestcover
+	go get github.com/client9/misspell/cmd/misspell
+	go get github.com/jgautheron/goconst/cmd/goconst
