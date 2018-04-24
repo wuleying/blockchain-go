@@ -5,11 +5,10 @@ import "math"
 // 全局常量
 const (
 	// 挖矿难度
-	MineTargetBits = 18
+	MineTargetBits = 20
 	// Number once最大值
 	MaxNonce = math.MaxInt64
 
 	// clog skip级别
-	ClogSkipDefault     = 0
 	ClogSkipDisplayInfo = 2
 )

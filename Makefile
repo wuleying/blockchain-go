@@ -75,7 +75,7 @@ ineffassign:
 	done
 
 misspell:
-	misspell -i "unknwon" $(shell find . -maxdepth 1 -mindepth 1 -type d | egrep -v "vendor|doc|bin|.git|.idea")
+	misspell $(shell find . -maxdepth 1 -mindepth 1 | egrep -v "vendor|bin|.git|.idea")
 
 goconst:
 	goconst $(shell glide nv)
