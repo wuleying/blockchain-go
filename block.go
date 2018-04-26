@@ -4,16 +4,16 @@ import (
 	"time"
 )
 
-// Block keeps block headers
+// Block 区块结构体
 type Block struct {
-	Timestamp     int64
-	Data          []byte
-	PrevBlockHash []byte
-	Hash          []byte
-	Nonce         int
+	Timestamp     int64  // 当前区块创建时间
+	Data          []byte // 区块存储的信息
+	PrevBlockHash []byte // 前一个块的哈希
+	Hash          []byte // 当前块的哈希
+	Nonce         int    // Number once，在密码学中Nonce是一个只被使用一次的任意或非重复的随机数值
 }
 
-// NewBlock creates and returns Block
+// NewBlock 创建并返回一个区块
 func NewBlock(data string, prevBlockHash []byte) *Block {
 	block := &Block{time.Now().Unix(), []byte(data), prevBlockHash, []byte{}, 0}
 	pow := NewProofOfWork(block)
@@ -25,7 +25,7 @@ func NewBlock(data string, prevBlockHash []byte) *Block {
 	return block
 }
 
-// NewGenesisBlock creates and returns genesis Block
+// NewGenesisBlock 创建并返回一个创世区块
 func NewGenesisBlock() *Block {
 	return NewBlock("Genesis Block", []byte{})
 }
