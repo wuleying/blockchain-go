@@ -27,5 +27,6 @@ func NewBlock(data string, prevBlockHash []byte) *Block {
 
 // NewGenesisBlock 创建并返回一个创世区块
 func NewGenesisBlock() *Block {
+	// 创世区块 前一个块的哈希为空
 	return NewBlock("Genesis Block", []byte{})
 }

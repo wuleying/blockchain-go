@@ -64,7 +64,7 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 	return nonce, hash[:]
 }
 
-// Validate validates block's PoW
+// Validate 验证工作量证明
 func (pow *ProofOfWork) Validate() bool {
 	var hashInt big.Int
 
