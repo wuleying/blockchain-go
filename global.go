@@ -5,7 +5,7 @@ import "math"
 // 全局常量
 const (
 	// 挖矿难度
-	MineTargetBits = 20
+	MineTargetBits = 18
 	// Number once最大值
 	MaxNonce = math.MaxInt64
 
