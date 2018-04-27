@@ -26,10 +26,11 @@ func main() {
 	bc.AddBlock("2")
 
 	for _, block := range bc.blocks {
-		clog.Info("Prev. hash: %x", block.PrevBlockHash)
+		clog.Info("Prev hash: %x", block.PrevBlockHash)
 		clog.Info("Data: %s", block.Data)
 		clog.Info("Hash: %x", block.Hash)
+		clog.Info("Nonce: %d", block.Nonce)
 		pow := NewProofOfWork(block)
-		clog.Info("PoW: %s", strconv.FormatBool(pow.Validate()))
+		clog.Info("PoW: %s\n", strconv.FormatBool(pow.Validate()))
 	}
 }
