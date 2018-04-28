@@ -13,12 +13,16 @@ type Block struct {
 	Nonce         int    // Number once，在密码学中Nonce是一个只被使用一次的任意或非重复的随机数值
 }
 
-// NewBlock 创建并返回一个区块
+// NewBlock 创建并返回一个块
 func NewBlock(data string, prevBlockHash []byte) *Block {
+	// 初始化块
 	block := &Block{time.Now().Unix(), []byte(data), prevBlockHash, []byte{}, 0}
-	pow := NewProofOfWork(block)
-	nonce, hash := pow.Run()
 
+	// 工作量证明
+	pow := NewProofOfWork(block)
+
+	// 获取并设置nonce与hash值
+	nonce, hash := pow.Run()
 	block.Hash = hash[:]
 	block.Nonce = nonce
 
