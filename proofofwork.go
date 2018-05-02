@@ -23,7 +23,7 @@ func NewProofOfWork(b *Block) *ProofOfWork {
 	return pow
 }
 
-// prepareData
+// prepareData 装填数据
 func (pow *ProofOfWork) prepareData(nonce int) []byte {
 	data := bytes.Join(
 		[][]byte{
@@ -39,7 +39,7 @@ func (pow *ProofOfWork) prepareData(nonce int) []byte {
 	return data
 }
 
-// Run performs a proof-of-work
+// Run 运行工作量证明
 func (pow *ProofOfWork) Run() (int, []byte) {
 	var hashInt big.Int
 	var hash [32]byte
