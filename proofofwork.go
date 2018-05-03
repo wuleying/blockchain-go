@@ -7,13 +7,13 @@ import (
 	"math/big"
 )
 
-// ProofOfWork represents a proof-of-work
+// ProofOfWork 工作量证明结构体
 type ProofOfWork struct {
 	block  *Block
 	target *big.Int
 }
 
-// NewProofOfWork builds and returns a ProofOfWork
+// NewProofOfWork 创建并返回一个工作量证明结构体
 func NewProofOfWork(b *Block) *ProofOfWork {
 	target := big.NewInt(1)
 	target.Lsh(target, uint(256-MineTargetBits))
