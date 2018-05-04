@@ -22,8 +22,8 @@ func main() {
 
 	bc := NewBlockchain()
 
-	bc.AddBlock("1")
-	bc.AddBlock("2")
+	bc.AddBlock("First Block")
+	bc.AddBlock("Second Block")
 
 	for _, block := range bc.blocks {
 		clog.Info("Prev hash: %x", block.PrevBlockHash)
