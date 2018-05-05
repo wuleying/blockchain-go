@@ -20,9 +20,12 @@ func init() {
 func main() {
 	defer clog.Shutdown()
 
-	bc := NewBlockchain()
+	// 创建一个区块链
+	bc := CreateBlockchain()
 
+	// 第一个区块
 	bc.AddBlock("First Block")
+	// 第二个区块
 	bc.AddBlock("Second Block")
 
 	for _, block := range bc.blocks {

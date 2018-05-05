@@ -15,7 +15,7 @@ func (bc *Blockchain) AddBlock(data string) {
 	bc.blocks = append(bc.blocks, newBlock)
 }
 
-// NewBlockchain 创建一个新区块链并生成一个创世区块
-func NewBlockchain() *Blockchain {
+// CreateBlockchain 创建一个新区块链并生成一个创世区块
+func CreateBlockchain() *Blockchain {
 	return &Blockchain{[]*Block{NewGenesisBlock()}}
 }
