@@ -46,6 +46,8 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 	nonce := 0
 
 	fmt.Printf("Mining the block containing \"%s\"\n", pow.block.Data)
+
+	// 开始挖矿
 	for nonce < MaxNonce {
 		data := pow.prepareData(nonce)
 
@@ -56,9 +58,11 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 		if hashInt.Cmp(pow.target) == -1 {
 			break
 		} else {
+			// 不正确，nonce加1
 			nonce++
 		}
 	}
+
 	fmt.Println()
 
 	return nonce, hash[:]
