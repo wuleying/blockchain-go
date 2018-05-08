@@ -47,7 +47,7 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 
 	fmt.Printf("Mining the block containing \"%s\"\n", pow.block.Data)
 
-	// 开始挖矿
+	// 验证工作量证明 nonce 不能大于 int64 最大值
 	for nonce < MaxNonce {
 		data := pow.prepareData(nonce)
 
