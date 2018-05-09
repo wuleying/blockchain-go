@@ -25,6 +25,7 @@ func NewProofOfWork(b *Block) *ProofOfWork {
 
 // prepareData 装填数据
 func (pow *ProofOfWork) prepareData(nonce int) []byte {
+	// 数据格式：前一区块hash+当前区块数据+16进制时间戳+16进制挖矿难度系数+16进制nonce
 	data := bytes.Join(
 		[][]byte{
 			pow.block.PrevBlockHash,
