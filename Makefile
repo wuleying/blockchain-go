@@ -89,6 +89,5 @@ get:
 	go get github.com/gordonklaus/ineffassign
 	go get github.com/fzipp/gocyclo
 	go get github.com/golang/lint/golint
-	go get github.com/pierrre/gotestcover
 	go get github.com/client9/misspell/cmd/misspell
 	go get github.com/jgautheron/goconst/cmd/goconst
